@@ -1,18 +1,41 @@
-import { gql } from 'apollo-server';
+import { gql } from "apollo-server";
 
 const typeDefs = gql`
-type User {
-  Name: String
-  Email: String
-  userType: String
-  Password: String
-}  
-type Query {
+  type User {
+    FName: String
+    LName: String
+    Email: String
+    Password: String
+    token: String
+  }
+  type Todo {
+    email:String
+    title: String
+    description: String
+    completed: String
+    completedOn: String
+    urgency: String
+  }
+  type Query {
     hello: String
-    users: [User!]!
+    todosByEmail(email: String!): [Todo]
   }
   type Mutation {
     login(email: String!, password: String!): User
+    signup(
+      fname: String!
+      lname: String!
+      email: String!
+      password: String!
+    ): User
+    creattodo(
+      email: String
+      title: String
+      description: String
+      completed: Boolean
+      completedOn: String
+      urgency: String
+    ): Todo
   }
 `;
 
